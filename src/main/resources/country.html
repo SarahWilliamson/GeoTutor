@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https//www.thymeleaf.org">
+<head>
+<title>A Course</title>
+<link rel="stylesheet" type="text/css"
+        href="/css/ReviewPageStyleSheet.css" />
+</head>
+<body>
+<h1 id="heading">A Single Course</h1>
+
+<img th:src="@{${'/images/' + review.image}}">
+
+<div id="list" th:each="review: ${reviews}">
+<p th:text="${review.title}"></p>
+<p th:text="${review.category}"></p>
+<a href="http://localhost:8080/show-all-reviews">Back to home</a>
+
+</div>
+</body>
+</html>

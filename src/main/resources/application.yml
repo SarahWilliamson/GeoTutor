@@ -1,0 +1,14 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  security:
+    user:
+      name: admin
+      password: admin
+countries:
+  - name: Scotland
+    path: src/main/resources/flags/_scotland.png
+    capital: Edinburgh
+    borders:
+      - England
