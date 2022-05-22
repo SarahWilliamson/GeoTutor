@@ -6,9 +6,20 @@ spring:
     user:
       name: admin
       password: admin
+application:
+  repository: CountryFile
 countries:
   - name: Scotland
-    path: src/main/resources/flags/_scotland.png
+    path: /flags/_scotland.png
     capital: Edinburgh
     borders:
       - England
+  - name: France
+    path: /flags/fr.png
+    capital: Paris
+    borders:
+      - Belgium
+      - Luxembourg
+      - Germany
+      - Switzerland
+      - Italy

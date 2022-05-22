@@ -5,15 +5,18 @@ import geotutor.service.CountryService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/api")
 @Slf4j
 public class CountryController {
 
@@ -26,6 +29,13 @@ public class CountryController {
         return countryService.findAll();
     }
 
-
+    @GetMapping(value = {"/flag/{name}","/flag"}, produces = MediaType.IMAGE_PNG_VALUE)
+    public @ResponseBody ResponseEntity<byte[]> getFlag (@PathVariable(required = false) String name) throws IOException {
+        InputStream in = getClass()
+                .getResourceAsStream(countryService.getFlagPath(name));
+        final HttpHeaders headers = new HttpHeaders();
+        headers.set("Country", name);
+        return new ResponseEntity<> (org.apache.commons.io.IOUtils.toByteArray(in), headers, HttpStatus.OK);
+    }
 
 }
